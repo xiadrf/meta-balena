@@ -55,7 +55,6 @@ FILES_${PN} += " \
 	/lib/systemd/system/* \
 	/home/root \
 	/boot/init \
-	/boot/storage-driver \
 	${localstatedir} \
 	"
 
@@ -130,7 +129,6 @@ do_install() {
 	install -m 0755 ${S}/src/import/bundles/dynbinary-balena/balena-engine ${D}/${bindir}/balena-engine
 	install -d ${D}/boot
 	install -m 0755 ${S}/src/import/cmd/mobynit/mobynit ${D}/boot/init
-	echo ${BALENA_STORAGE} > ${D}/boot/storage-driver
 
 	ln -sf balena-engine ${D}/${bindir}/balena
 	ln -sf balena-engine ${D}/${bindir}/balenad
