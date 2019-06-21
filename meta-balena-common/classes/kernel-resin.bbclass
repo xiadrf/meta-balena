@@ -169,6 +169,8 @@ RESIN_CONFIGS[aufs] = " \
 
 RESIN_CONFIGS[overlay2] = " \
     CONFIG_OVERLAY_FS=y \
+    CONFIG_AUFS_FS=y \
+    CONFIG_AUFS_XATTR=y \
     "
 
 RESIN_CONFIGS[apple_hfs] = " \
