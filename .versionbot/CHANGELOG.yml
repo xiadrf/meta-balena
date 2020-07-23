@@ -1,4 +1,22 @@
 - commits:
+    - subject: 'modemmanager: add u-blox-modeswitch scripts'
+      hash: 25a0d564c8ce06f56048802d66c48e59c60dd7a9
+      body: |
+        Add the u-blox-modeswitch scripts to modemmanager. The scripts are
+        generic and therefore it makes sense to provide them as part of
+        meta-balena instead of balena-raspberrypi.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Connects-to: '#510 (in balena-raspberrypi)'
+        connects-to: '#510 (in balena-raspberrypi)'
+        Signed-off-by: Mark Corbin <mark@balena.io>
+        signed-off-by: Mark Corbin <mark@balena.io>
+      author: Mark Corbin
+      nested: []
+  version: 2.53.9
+  date: 2020-07-23T11:59:07.034Z
+- commits:
     - subject: 'resin-supervisor: Create required directories before launch'
       hash: 7be7738c655e37e48c1a98f9e1e0ff2795d66bf8
       body: |
