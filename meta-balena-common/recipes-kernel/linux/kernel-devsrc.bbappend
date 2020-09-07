@@ -17,4 +17,4 @@ INSANE_SKIP_${PN} = "arch debug-files"
 # kernel-modules-headers recipe does some work on the kernel tree.
 # We'd like to make sure that we dont tarball at the same time as that
 # recipe is working on the tree
-DEPENDS += "kernel-modules-headers"
+#DEPENDS += "kernel-modules-headers"
