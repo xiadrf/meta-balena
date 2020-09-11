@@ -1,6 +1,22 @@
 Change log
 -----------
 
+# v2.59.0
+## (2020-09-11)
+
+* Add host extensions support [Alex Gonzalez]
+* docker-disk: Add the host extension images to the data partition [Alex Gonzalez]
+* docker-disk: Generalize hostapp platform variable [Alex Gonzalez]
+* initrdscripts: Busybox switch_root does not support -c argument [Alex Gonzalez]
+* resin-filesystem-expand: Omit fs check and resize if partition is mounted [Alex Gonzalez]
+* initrdscripts: Expand the resin-data filesystem [Alex Gonzalez]
+* initrdscripts: Add resin-data to fs UUID generation [Alex Gonzalez]
+* resin-data.mount: Remove default dependencies [Alex Gonzalez]
+* packagegroup-resin: Add independent mobynit package to image [Alex Gonzalez]
+* balena-engine: Do not build mobynit [Alex Gonzalez]
+* mobynit: Fix source directory [Alex Gonzalez]
+* mobynit: Separate recipe from balena-engine [Alex Gonzalez]
+
 # v2.58.0
 ## (2020-09-05)
 

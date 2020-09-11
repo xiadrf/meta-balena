@@ -1,4 +1,160 @@
 - commits:
+    - subject: Add host extensions support
+      hash: f0dd49f931d6ae85942252aafcc96fec026b0cc5
+      body: |
+        Add a new section that described the host extensions functionality.
+
+        Fixes #1984
+      footer:
+        Change-type: minor
+        change-type: minor
+        Changelog-entry: Add host extensions support
+        changelog-entry: Add host extensions support
+        Signed-off-by: Alex Gonzalez <alexg@balena.io>
+        signed-off-by: Alex Gonzalez <alexg@balena.io>
+      author: Alex Gonzalez
+      nested: []
+    - subject: 'docker-disk: Add the host extension images to the data partition'
+      hash: 551ef36677de2848b1fa2bdab95fc56b9a660d60
+      body: |
+        Host extension images contain extra content that is overlayed over the
+        root filesystem at boot.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alex Gonzalez <alexg@balena.io>
+        signed-off-by: Alex Gonzalez <alexg@balena.io>
+      author: Alex Gonzalez
+      nested: []
+    - subject: 'docker-disk: Generalize hostapp platform variable'
+      hash: fb60868fdf5f7dcb682d68cd256d45d53884328e
+      body: |
+        Rename HELLO_PLATFORM to HOSTAPP_PLATFORM so it can be used with any
+        app type.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alex Gonzalez <alexg@balena.io>
+        signed-off-by: Alex Gonzalez <alexg@balena.io>
+      author: Alex Gonzalez
+      nested: []
+    - subject: 'initrdscripts: Busybox switch_root does not support -c argument'
+      hash: 50533924e52150d9eba1c91fd9d40a10becfe34b
+      body: |
+        Calling busybox switch_root in this way has always been complaining but
+        the error log did not get to the console.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alex Gonzalez <alexg@balena.io>
+        signed-off-by: Alex Gonzalez <alexg@balena.io>
+      author: Alex Gonzalez
+      nested: []
+    - subject: >-
+        resin-filesystem-expand: Omit fs check and resize if partition is
+        mounted
+      hash: 612d80375d71929475a542759e17cae331683ba8
+      body: |
+        Now that the data partition will be mounted from the initramfs for host
+        extensions support, this script will only run if something went wrong.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alex Gonzalez <alexg@balena.io>
+        signed-off-by: Alex Gonzalez <alexg@balena.io>
+      author: Alex Gonzalez
+      nested: []
+    - subject: 'initrdscripts: Expand the resin-data filesystem'
+      hash: e5becc77c5de041201bacf643d18d08556d9946b
+      body: |
+        As the resin-data partition will be mounted in the initramfs, its
+        filesystem needs to be expanded before that.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alex Gonzalez <alexg@balena.io>
+        signed-off-by: Alex Gonzalez <alexg@balena.io>
+      author: Alex Gonzalez
+      nested: []
+    - subject: 'initrdscripts: Add resin-data to fs UUID generation'
+      hash: a735c1daf2a4a00b5f08ce88ea21a3c743f2ff51
+      body: |
+        The resin-data partition will be mounted in the initramfs for the host
+        extension support so the UUID generation needs to happen before that.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alex Gonzalez <alexg@balena.io>
+        signed-off-by: Alex Gonzalez <alexg@balena.io>
+      author: Alex Gonzalez
+      nested: []
+    - subject: 'resin-data.mount: Remove default dependencies'
+      hash: 0b4711137be46f6b2e8b506fd40dde0b0a3d9a18
+      body: >
+        With the data partition being mounted in the initramfs to support host
+
+        extensions, the runtime systemd-udev no longer sees the resin-data mount
+
+        event and this mount is blocked.
+
+
+        This is resolved by not adding the default dependency on the block
+        device.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alex Gonzalez <alexg@balena.io>
+        signed-off-by: Alex Gonzalez <alexg@balena.io>
+      author: Alex Gonzalez
+      nested: []
+    - subject: 'packagegroup-resin: Add independent mobynit package to image'
+      hash: bd618f48b8962b5c5f9134ed906196d3ae64cdc0
+      body: |
+        The mobynit tool also needs to be in resin-image.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alex Gonzalez <alexg@balena.io>
+        signed-off-by: Alex Gonzalez <alexg@balena.io>
+      author: Alex Gonzalez
+      nested: []
+    - subject: 'balena-engine: Do not build mobynit'
+      hash: 1013e62c74f70224c4d0b3a5b5110d897a22f843
+      body: |
+        The mobynit package has now been moved to an independent recipe.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alex Gonzalez <alexg@balena.io>
+        signed-off-by: Alex Gonzalez <alexg@balena.io>
+      author: Alex Gonzalez
+      nested: []
+    - subject: 'mobynit: Fix source directory'
+      hash: e53d1de7440906b7db272360f216967e5c4c29f5
+      body: |
+        The Go class in mobynit predates Go modules support.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alex Gonzalez <alexg@balena.io>
+        signed-off-by: Alex Gonzalez <alexg@balena.io>
+      author: Alex Gonzalez
+      nested: []
+    - subject: 'mobynit: Separate recipe from balena-engine'
+      hash: e853ca631dc2aba67f16026c8d8b4c2b49ae1d52
+      body: >
+        This commit adds a new recipe to build mobynit independently from
+        balena-engine.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alex Gonzalez <alexg@balena.io>
+        signed-off-by: Alex Gonzalez <alexg@balena.io>
+      author: Alex Gonzalez
+      nested: []
+  version: 2.59.0
+  date: 2020-09-11T11:14:17.069Z
+- commits:
     - subject: Respect balenaRootCA system-wide
       hash: 2218cb21d1fc813ac59c08b77046c5d014ad9a42
       body: |
