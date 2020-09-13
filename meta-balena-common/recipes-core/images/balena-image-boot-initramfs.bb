@@ -7,6 +7,10 @@ PACKAGE_INSTALL = " \
     kexec-tools-klibc \
 "
 
+# Allow for image debugging in development image
+PACKAGE_INSTALL_append = " ${@bb.utils.contains('DEVELOPMENT_IMAGE','1','initramfs-debug busybox base-passwd ${ROOTFS_BOOTSTRAP_INSTALL}','',d)}"
+BAD_RECOMMENDATIONS += "${@bb.utils.contains('DEVELOPMENT_IMAGE','1','busybox-syslog','',d)}"
+
 # Do not pollute the initrd image with rootfs features
 IMAGE_FEATURES = ""
 
