@@ -98,6 +98,7 @@ RESIN_CONFIGS ?= " \
     dummy \
     uinput \
     no-debug-info \
+    kexec \
     "
 
 #
@@ -160,6 +161,13 @@ RESIN_CONFIGS[balena] ?= " \
     CONFIG_KEYS=y \
     CONFIG_MEMCG=y \
     CONFIG_MEMCG_SWAP=y \
+    "
+
+RESIN_CONFIGS[kexec] = " \
+    CONFIG_SUSPEND=y \
+    CONFIG_PM_SLEEP=y \
+    CONFIG_PM_SLEEP_SMP=y \
+    CONFIG_KEXEC=y \
     "
 
 RESIN_CONFIGS[aufs] = " \
