@@ -76,5 +76,8 @@ RESIN_BOOT_PARTITION_FILES_append = " \
 
 RESIN_BOOT_PARTITION_FILES_append = "${@ ' extra_uEnv.txt:/extra_uEnv.txt ' if d.getVar('UBOOT_MACHINE') else ''}"
 
+# BalenaOS second stage bootlaoder
+RESIN_BOOT_PARTITION_FILES_append = " balena-kboot/${KERNEL_IMAGETYPE}:/${KERNEL_IMAGETYPE}"
+
 # Resin image flag file
 RESIN_BOOT_PARTITION_FILES_append = " ${RESIN_IMAGE_FLAG_FILE}:/${RESIN_IMAGE_FLAG_FILE}"
