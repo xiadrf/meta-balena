@@ -615,7 +615,6 @@ python do_kernel_resin_aufs_fetch_and_unpack() {
     if balena_storage == "overlay2":
         if int(kernelversion_major) < 4:
             bb.fatal("overlay2 is only available from kernel version 4.0. Can't use overlay2 as BALENA_STORAGE.")
-        return
 
     # Everything from here is for aufs
     if os.path.isdir(kernelsource + "/fs/aufs"):
@@ -750,7 +749,7 @@ kernel_resin_aufs_fetch_and_unpack[vardeps] += "BALENA_STORAGE"
 # copy needed aufs files and apply aufs patches
 apply_aufs_patches () {
     # bail out if it looks like the kernel source tree already has the fs/aufs directory
-    if [ -d ${S}/fs/aufs ] || [ "${BALENA_STORAGE}" != "aufs" ]; then
+    if [ -d ${S}/fs/aufs ]; then
         exit
     fi
     cp -r ${WORKDIR}/aufs_standalone/Documentation ${WORKDIR}/aufs_standalone/fs ${S}
