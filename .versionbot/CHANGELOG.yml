@@ -1,4 +1,55 @@
 - commits:
+    - subject: 'systemd/timeinit: add fake.hwclock to maintain system time over reboots'
+      hash: 09a7e036607211c1cddbe0db686f0e0e418c9217
+      body: |
+        In order to produce sensible timestamps for journald log messages:
+        a) the system time needs to be maintained correctly over a reboot, and
+        b) the system time needs to be set before journald is started.
+
+        Currently the system time is maintained over reboots on systems
+        without an RTC using the last modified time of the chrony drift file.
+        However there are a couple of issues with this approach:
+
+        a) /var/lib/chrony/ is not mounted early enough in the boot process
+        to be available for setting the time before journald is started.
+        b) there is an issue with the current systemd dependencies that result
+        in the last modified time of the drift file not being updated when the
+        system is shutdown or rebooted (see #1995).
+
+        The Debian fake-hwclock service (as used by Raspberry Pi OS) has been
+        added to overcome these issues.
+
+        The fake-hwclock service will save and restore the system time from
+        the fake-hwclock.data file. A persistent r/w location
+        (root-overlay/etc/fake-hwclock/) has been added to the resin-state
+        partition for storage of this file. The system time is loaded from
+        this file at boot and saved to it on shutdown. An additional timer
+        service has been added to update the file on an hourly basis to cater
+        for unexpected shutdown scenarios, e.g. power failure.
+
+        The timeinit-timestamp service has improved logging and has been
+        renamed to timeinit-buildtime for clarity.
+
+        A new time-set.target has been added as per upstream systemd and
+        the fake-hwclock and timeinit-buildtime services have been added
+        to it.
+
+        The '-s' command line parameter has been dropped from chronyd as
+        restoring time from the drift file is no longer necessary (and
+        the restore from RTC functionality is already covered by the
+        timeinit-rtc service).
+      footer:
+        Change-type: minor
+        change-type: minor
+        Connects-to: '#1367 #1919'
+        connects-to: '#1367 #1919'
+        Signed-off-by: Mark Corbin <mark@balena.io>
+        signed-off-by: Mark Corbin <mark@balena.io>
+      author: Mark Corbin
+      nested: []
+  version: 2.59.0
+  date: 2020-09-22T10:57:37.698Z
+- commits:
     - subject: Blacklist supervisor configuration backend files during HUP
       hash: 43a14fef9875f0d0afc23a833cc8e9dc4ae80536
       body: >

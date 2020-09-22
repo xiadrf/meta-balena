@@ -1,6 +1,11 @@
 Change log
 -----------
 
+# v2.59.0
+## (2020-09-22)
+
+* systemd/timeinit: add fake.hwclock to maintain system time over reboots [Mark Corbin]
+
 # v2.58.3
 ## (2020-09-18)
 
