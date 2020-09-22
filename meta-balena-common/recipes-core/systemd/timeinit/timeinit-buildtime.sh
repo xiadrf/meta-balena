@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright 2018 Resinio Ltd.
+# Copyright 2020 Balena Ltd.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,15 +23,21 @@ if [ ! -f $TIMESTAMP ]; then
 	exit 1
 fi
 
+echo "[INFO] Setting system time from build time."
+
 SYS_TIME=$(date -u "+%4Y%2m%2d%2H%2M%2S")
 BUILD_TIME=$(cat $TIMESTAMP)
 
+OLD_SYS_TIME=$(date -d "${SYS_TIME:0:8} ${SYS_TIME:8:2}:${SYS_TIME:10:2}:${SYS_TIME:12:2}")
+NEW_SYS_TIME=$(date -d "${BUILD_TIME:0:8} ${BUILD_TIME:8:2}:${BUILD_TIME:10:2}:${BUILD_TIME:12:2}")
+
 if [ "$SYS_TIME" -lt "$BUILD_TIME" ]; then
-	echo "[INFO] Updating systemd time from build time."
 	BUILD_DATETIME="$(echo "$BUILD_TIME" | awk '{string=substr($0, 5, 8); print string;}')"
 	BUILD_YEAR="$(echo "$BUILD_TIME" | awk '{string=substr($0, 1, 4); print string;}')"
 	BUILD_SEC="$(echo "$BUILD_TIME" | awk '{string=substr($0, 13, 2); print string;}')"
-	date -u "${BUILD_DATETIME}${BUILD_YEAR}.${BUILD_SEC}"
+	date -u "${BUILD_DATETIME}${BUILD_YEAR}.${BUILD_SEC}" > /dev/null 2>&1
+	echo "[INFO] Old time: $OLD_SYS_TIME"
+	echo "[INFO] New time: $NEW_SYS_TIME"
 else
-	echo "[INFO] Systemd date already updated."
+	echo "[INFO] System time already set."
 fi
